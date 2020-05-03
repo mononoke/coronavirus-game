@@ -1,6 +1,6 @@
 # covid
 
-### [LIVE DEMO](http://http://coronavirus-game.ajderha.com//)
+### [LIVE DEMO](http://coronavirus-game.ajderha.com/)
 
 ## Project setup
 ```
