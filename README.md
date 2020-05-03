@@ -1,5 +1,7 @@
 # covid
 
+### [LIVE DEMO](http://http://coronavirus-game.ajderha.com//)
+
 ## Project setup
 ```
 yarn install
