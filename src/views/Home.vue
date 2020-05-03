@@ -1,15 +1,14 @@
 <template>
-    <div
-        class="home"
-        :class="{'home__earth home__image': earth}"
-    >
-        <Covid v-if="!earth" @changeRound="changeRound()"/>
+    <div class="home home__image">
+        <Covid v-if="!earth" @changeRound="changeRound()" class="home__game"/>
         <div
-            v-if="earth"
             class="home__covid home__image"
             :style="{height: covidHeight + 'px', width: covidHeight + 'px'}"
         ></div>
-        <div class="home__back">
+        <div
+            class="home__back"
+            :class="{'home__back_earth': earth}"
+        >
             <div v-for="round in rounds" :key="round" class="home__round home__image" />
         </div>
     </div>
@@ -27,13 +26,13 @@ export default {
         return {
             rounds: [],
             earth: false,
-            covidHeight: 10
+            covidHeight: 0
         }
     },
     methods: {
         changeRound() {
             this.rounds.push(this.rounds.length)
-            if (this.rounds.length === 1) {
+            if (this.rounds.length === 4) {
                 this.rounds = []
                 this.earth = true
                 this.growCovid()
@@ -44,9 +43,6 @@ export default {
                 this.covidHeight = this.$el.clientHeight * 3
             }, 500)
         }
-    },
-    beforeDestroy() {
-        this.stopGrow()
     }
 }
 </script>
@@ -61,8 +57,7 @@ export default {
     padding 15px
     box-sizing border-box
     overflow hidden
-    &.home__earth
-        background-image url('../assets/earth.png')
+    background-image url('../assets/earth.png')
 
 .home__back
     position absolute
@@ -72,7 +67,12 @@ export default {
     display grid
     grid-template-columns 1fr 1fr
     grid-template-rows 1fr 1fr
-    z-index -1
+    background-color #ffffff
+    &.home__back_earth
+        background-color transparent
+
+.home__game
+    z-index 1
 
 .home__round
     background-image url('../assets/covid.png')
@@ -84,6 +84,6 @@ export default {
 
 .home__covid
     background-image url('../assets/covid.png')
-    transition all linear 20s
+    transition all linear 15s
     z-index 3
 </style>
